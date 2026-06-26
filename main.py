@@ -34,8 +34,24 @@ class students_managment_main:
         self.curser.execute("insert into student_data (name,age,marks,grade) values (?,?,?,?) ", (name,age,marks,grade))
         self.serv.commit()
 
-    def update_marks(self,marks,id):
-        self.curser.execute("UPDATE student_data SET marks = ? WHERE id=?",(marks,id))
+    def update_marks(self,markz,id):
+        marks = int(markz)
+        if 100 >= marks >= 95 :
+            grade='A+'
+        elif 95 >= marks >= 85:
+           grade='A'
+        elif 85 >= marks >= 80:
+            grade='B+'
+        elif 80 >= marks >= 75:
+            grade='B'
+        elif 75 >= marks >= 70:
+            grade='C'
+        else:
+            grade='D'
+            
+        print(marks,grade)
+        self.curser.execute("UPDATE student_data SET marks = ? WHERE id = ?",(marks,id))
+        self.curser.execute("UPDATE student_data SET grade = ? WHERE id = ?",(grade,id))
         self.serv.commit()
         print('updated succesfully')
 
@@ -103,7 +119,11 @@ def search():
         nmae = request.form["student_name"]
         smn.curser.execute("SELECT * FROM student_data where id = ? AND name = ?",(id,nmae))
         student = smn.curser.fetchone()
-        return render_template("search.html",student = student)
+        if student:
+            return render_template("search.html",student = student)
+        else:
+            gabu = "Student not found"
+            return render_template("search.html",gabu=gabu)
 
     return render_template("search.html")
 

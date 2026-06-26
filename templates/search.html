@@ -227,6 +227,8 @@
       </table>
     {% elif name or id %}
       <div class="no-results">⚠️ No student details found for the provided name and ID.</div>
+    {% elif gabu %}
+    <h1>{{gabu}}</h1>
     {% endif %}
   </div>
 </body>
