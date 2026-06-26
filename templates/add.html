@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Add Student</title>
+		<style>
+			:root {
+				--bg-dark: #060919;
+				--bg-mid: #111a33;
+				--card: rgba(18, 28, 51, 0.90);
+				--panel: rgba(255, 255, 255, 0.08);
+				--border: rgba(99, 102, 241, 0.22);
+				--accent: #6366f1;
+				--accent-alt: #22d3ee;
+				--text: #f8fafc;
+				--muted: #94a3b8;
+				--shadow: 0 30px 90px rgba(4, 11, 29, 0.35);
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				min-height: 100vh;
+				font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+				background: radial-gradient(circle at 20% 10%, rgba(99, 102, 241, 0.24), transparent 22%),
+					radial-gradient(circle at 80% 30%, rgba(34, 211, 238, 0.18), transparent 20%),
+					linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-mid) 100%);
+				color: var(--text);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 32px;
+			}
+
+			body::before {
+				content: "";
+				position: fixed;
+				top: -10%;
+				left: -10%;
+				width: 34rem;
+				height: 34rem;
+				background: radial-gradient(circle, rgba(99, 102, 241, 0.22), transparent 60%);
+				pointer-events: none;
+				filter: blur(48px);
+			}
+
+			.container {
+				position: relative;
+				width: min(600px, 100%);
+				padding: 42px 40px 36px;
+				border-radius: 32px;
+				background: var(--card);
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				box-shadow: var(--shadow);
+				backdrop-filter: blur(16px);
+				overflow: hidden;
+			}
+
+			.container::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 30%);
+				pointer-events: none;
+			}
+
+			h2 {
+				margin: 0 0 10px;
+				font-size: clamp(2rem, 2.5vw, 2.3rem);
+				letter-spacing: -0.05em;
+				line-height: 1.1;
+			}
+
+			.subtitle {
+				margin: 0 0 28px;
+				color: var(--muted);
+				font-size: 0.98rem;
+				line-height: 1.8;
+				max-width: 38rem;
+			}
+
+			.intro {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				gap: 18px;
+				align-items: center;
+				margin-bottom: 36px;
+			}
+
+			.header-chip {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 11px 18px;
+				background: rgba(99, 102, 241, 0.12);
+				color: var(--accent);
+				border-radius: 999px;
+				font-size: 0.88rem;
+				font-weight: 700;
+				letter-spacing: 0.02em;
+			}
+
+			.badge {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 52px;
+				height: 52px;
+				border-radius: 18px;
+				background: rgba(34, 211, 238, 0.14);
+				color: var(--accent-alt);
+				font-weight: 800;
+				font-size: 1.3rem;
+				box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+			}
+
+			.form-group {
+				margin-bottom: 22px;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 10px;
+				font-size: 0.95rem;
+				font-weight: 700;
+				color: #e2e8f0;
+			}
+
+			input[type=text],
+			input[type=number] {
+				width: 100%;
+				padding: 18px 20px;
+				border-radius: 18px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.06);
+				color: var(--text);
+				font-size: 1rem;
+				transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+			}
+
+			input[type=text]:focus,
+			input[type=number]:focus {
+				outline: none;
+				border-color: rgba(99, 102, 241, 0.65);
+				box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.12);
+				transform: translateY(-1px);
+				background: rgba(255, 255, 255, 0.12);
+			}
+
+			input::placeholder {
+				color: rgba(226, 232, 240, 0.7);
+			}
+
+			.actions {
+				margin-top: 30px;
+				text-align: right;
+			}
+
+			button {
+				width: 100%;
+				padding: 16px 28px;
+				border: none;
+				border-radius: 18px;
+				background: linear-gradient(135deg, #6366f1, #22d3ee);
+				color: #fff;
+				font-size: 1rem;
+				font-weight: 800;
+				cursor: pointer;
+				box-shadow: 0 18px 40px rgba(34, 211, 238, 0.22);
+				transition: transform 0.18s ease, box-shadow 0.18s ease;
+			}
+
+			button:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 24px 48px rgba(34, 211, 238, 0.30);
+			}
+
+			button:disabled {
+				opacity: 0.75;
+				cursor: not-allowed;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header-chip">Student record details</div>
+			<div class="intro">
+				<div class="badge">+</div>
+				<div>
+					<h2>Add Student</h2>
+					<p class="subtitle">Capture every student's profile with elegant form fields, clear validation, and crisp visual hierarchy.</p>
+				</div>
+			</div>
+			<form id="addStudentForm" method="POST" action="/add">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" id="name" name="name" required maxlength="100" placeholder="e.g. Alex Morgan">
+				</div>
+				<div class="form-group">
+					<label for="marks">Marks</label>
+					<input type="number" id="marks" name="marks" required min="0" max="100" step="1" placeholder="0 - 100">
+				</div>
+				<div class="form-group">
+					<label for="age">Age</label>
+					<input type="number" id="age" name="age" required min="1" max="150" step="1" placeholder="Student age">
+				</div>
+				<div class="actions">
+					<button type="submit">Add Student</button>
+				</div>
+			</form>
+		</div>
+
+		<script>
+			document.getElementById('addStudentForm').addEventListener('submit', function(e) {
+				var name = document.getElementById('name').value.trim();
+				if (!name) {
+					e.preventDefault();
+					alert('Please enter a name');
+				}
+			});
+		</script>
+	</body>
+</html>

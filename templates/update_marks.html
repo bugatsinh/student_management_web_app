@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121212">
+    <title>Update Marks | Student Manager</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #090c18;
+            --surface: rgba(13, 19, 38, 0.92);
+            --surface-soft: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.12);
+            --text: #f5f7ff;
+            --muted: #b8c1ff;
+            --accent-1: #7c5cff;
+            --accent-2: #fc5c7d;
+            --shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at top left, rgba(124, 92, 255, 0.25), transparent 18%),
+                        radial-gradient(circle at 80% 5%, rgba(252, 92, 125, 0.22), transparent 20%),
+                        linear-gradient(180deg, #080b16 0%, #111827 48%, #0e1323 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        body::before {
+            top: 18%;
+            left: 6%;
+            background: rgba(124, 92, 255, 0.35);
+        }
+
+        body::after {
+            bottom: 12%;
+            right: 6%;
+            background: rgba(252, 92, 125, 0.28);
+        }
+
+        .card {
+            position: relative;
+            width: min(560px, 100%);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            padding: 40px 38px 32px;
+            backdrop-filter: blur(16px);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(124, 92, 255, 0.18), transparent 42%, rgba(252, 92, 125, 0.12));
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .badge::before {
+            content: '★';
+            color: var(--accent-1);
+            font-size: 1rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 2.2vw, 2.4rem);
+            letter-spacing: 0.02em;
+            line-height: 1.05;
+        }
+
+        p {
+            margin: 16px 0 28px;
+            color: var(--muted);
+            line-height: 1.75;
+            max-width: 44ch;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        input {
+            width: 100%;
+            appearance: none;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 16px 18px;
+            font-size: 1rem;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+            outline: none;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        input:focus {
+            border-color: rgba(124, 92, 255, 0.85);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.08);
+            transform: translateY(-1px);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 28px;
+        }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 32px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 18px 40px rgba(124, 92, 255, 0.28);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 48px rgba(124, 92, 255, 0.32);
+        }
+
+        @media (max-width: 520px) {
+            .card {
+                padding: 32px 24px 28px;
+            }
+
+            .button-row {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <div class="header-row">
+            <div>
+                <h1>Update Student Marks</h1>
+                <p>Enter the new score below to refresh the student's report with clean, accurate results.</p>
+            </div>
+            <span class="badge">Secure update</span>
+        </div>
+
+        <form method="post" action="/update/{{id}}">
+            <div class="form-grid">
+                <div>
+                    <label for="NEW_Marks">New marks</label>
+                    <input id="NEW_Marks" name="NEW_Marks" type="number" min="0" max="100" placeholder="Enter score from 0 to 100" required>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button type="submit">Update Marks</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
