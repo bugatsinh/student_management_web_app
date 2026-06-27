@@ -93,6 +93,33 @@
       color: #bbb;
     }
 
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .nav-buttons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .nav-buttons a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+    }
+
     button {
       width: 100%;
       padding: 14px;
@@ -205,7 +232,10 @@
   <div class="container">
     <h1>🔍 Student Search</h1>
     <p class="subtitle">Find and view student information instantly</p>
-    
+    <div class="nav-buttons">
+      <a href="/">🏠 Home</a>
+      <a href="/manage_students">🧑‍🎓 Manage Student</a>
+    </div>
     <form method="post" action="/search">
       <label for="student_name">📝 Student Name</label>
       <input type="text" id="student_name" name="student_name" required placeholder="Enter student name">
