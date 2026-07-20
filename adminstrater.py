@@ -1,8 +1,8 @@
-from flask import Flask,render_template,request,redirect
+from flask import render_template,request,redirect,Blueprint
 import sqlite3
 
-app = Flask(__name__)
 
+student_blueprint = Blueprint('student', __name__, template_folder='templates')
 
 class students_managment_main:
     def __init__(self):
@@ -60,11 +60,12 @@ class students_managment_main:
         self.serv.commit()
         print('deleted succcesfully')
 
-@app.route('/')
+@student_blueprint.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/add',methods = ['GET','POST'])
+
+@student_blueprint.route('/add',methods = ['GET','POST'])
 def add():
     smn = students_managment_main()
     if request.method == "POST":
@@ -76,7 +77,7 @@ def add():
     return render_template('add.html')
 
 
-@app.route('/manage_students')
+@student_blueprint.route('/manage_students')
 def managestudent():
     smn = students_managment_main()
     smn.curser.execute("SELECT * FROM student_data")
@@ -94,14 +95,14 @@ def managestudent():
     tpr = smn.curser.fetchone()
     return render_template('manage_student.html',data = dta,average_marks=avm,trp=tpr)
 
-@app.route('/delet/<int:id>',methods = ['GET','POST','DELETE'])
+@student_blueprint.route('/delet/<int:id>',methods = ['GET','POST','DELETE'])
 def delet_student(id):
     smn = students_managment_main()
     if request.method == "POST":
         smn.delet_std(id)
         return redirect("/")
 
-@app.route('/update/<int:id>',methods = ['GET','POST'])
+@student_blueprint.route('/update/<int:id>',methods = ['GET','POST'])
 def update_student(id):
     smn = students_managment_main()
     if request.method == "POST":
@@ -111,7 +112,7 @@ def update_student(id):
     return render_template("update_marks.html",id=id)
     
 
-@app.route('/search',methods=["GET","POST"])
+@student_blueprint.route('/search',methods=["GET","POST"])
 def search():
     smn = students_managment_main()
     if request.method == "POST":
@@ -127,6 +128,5 @@ def search():
 
     return render_template("search.html")
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

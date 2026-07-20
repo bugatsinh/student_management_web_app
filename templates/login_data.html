@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            width: 320px;
+        }
+        .login-container h1 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #333333;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555555;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #d1d9e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1f6feb;
+            border: none;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #1258bb;
+        }
+        .login-footer {
+            margin-top: 16px;
+            font-size: 13px;
+            text-align: center;
+            color: #777777;
+        }
+        .login-footer a {
+            color: #1f6feb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Member Login</h1>
+        <form action="/login/log_in" method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autocomplete="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+            <button type="submit">Sign In</button>
+        </form>
+        <div class="signup-footer">
+            <p>Don't have an account? <a href="/sign_up">Sign up</a></p>
+        </div>
+        <div class="login-footer">
+            <p>Forgot password? <a href="/reset">Reset it</a></p>
+        </div>
+    </div>
+</body>
+</html>

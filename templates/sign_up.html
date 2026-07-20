@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .signup-container {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .signup-container h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .signup-container label {
+            display: block;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+        .signup-container input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .signup-container button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .signup-container button:hover {
+            background: #0056d6;
+        }
+        .signup-footer {
+            margin-top: 16px;
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Create Account</h1>
+        <form action="/login/sign_up" method="post">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        {% if raunda %}
+            <p style="color: red;">Passwords do not match.</p>
+        {% endif %}
+        <div class="signup-footer">
+            Already have an account? <a href="/">Log in</a>
+        </div>
+    </div>
+</body>
+</html>

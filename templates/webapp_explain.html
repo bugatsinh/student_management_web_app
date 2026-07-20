@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web App Explanation</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: rgba(15, 23, 42, 0.92);
+      --accent: #7c3aed;
+      --accent-soft: #c4b5fd;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.18), transparent 25%),
+                  radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.18), transparent 20%),
+                  var(--bg);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .topbar {
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      z-index: 10;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #f8fafc;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .button {
+      padding: 0.75rem 1.3rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .login {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: var(--text);
+    }
+
+    .signup {
+      background: linear-gradient(135deg, #8b5cf6, #38bdf8);
+      color: #ffffff;
+      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.18);
+    }
+
+    .hero {
+      max-width: 960px;
+      margin: 3rem auto 2rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .features {
+      padding: 0 2rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.75rem;
+      backdrop-filter: blur(18px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124, 58, 237, 0.35);
+    }
+
+    .feature-card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 0.85rem;
+      color: #ffffff;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .how-it-works {
+      max-width: 960px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+
+    .how-it-works h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .how-list {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+      padding: 0;
+    }
+
+    .how-list li {
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.3rem 1.25rem;
+    }
+
+    .how-list li strong {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: #f8fafc;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 2rem 1rem 3rem;
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .hero {
+        padding: 0 1rem;
+      }
+
+      .features {
+        padding: 0 1rem 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Student Manager App</div>
+    <div class="nav-links">
+      <a class="button login" href="/login/log_in">Log In</a>
+      <a class="button signup" href="/login/sign_up">Sign Up</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Explain your web app with clarity and style</h1>
+    <p>Welcome to the Student Manager web app explanation page. This interface highlights the app's core
+         features, from account access to daily classroom management.</p>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h2>Secure login and signup</h2>
+      <p>Users can quickly access the app using the top bar buttons. New users sign up with a clean
+         registration flow, then log in to reach the dashboard immediately.</p>
+    </div>
+    <div class="feature-card">
+      <h2>Dashboard overview</h2>
+      <p>Once authenticated, the app displays student information, attendance records, class schedules,
+         and performance insights in a single organized dashboard.</p>
+    </div>
+    <div class="feature-card">
+      <h2>Student management</h2>
+      <p>Manage student profiles, update grades, add notices, and track progress. The app helps keep all
+         student data centralized and easy to reach.</p>
+    </div>
+    <div class="feature-card">
+      <h2>Attendance and reporting</h2>
+      <p>Monitor attendance patterns, generate reports, and review analytics. The app makes it easy
+         to spot trends and keep records in one place.</p>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How the app works</h2>
+    <ul class="how-list">
+      <li>
+        <strong>Step 1: Access the top bar</strong>
+        Click "Log In" to enter your existing account, or "Sign Up" to create a new profile and begin
+         using the app.
+      </li>
+
+      <li>
+        <strong>Step 2: Explore the dashboard</strong>
+        After authentication, you are taken to the main dashboard where all tools and data are available.
+      </li>
+      <li>
+        <strong>Step 3: Use key features</strong>
+        Add students, manage classes, update attendance, and review reports with modern, easy-to-use
+         interfaces.
+      </li>
+      <li>
+        <strong>Step 4: Stay organized</strong>
+        The app is designed to be intuitive and visually appealing, so managing your student workflow
+         feels smooth and efficient.
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Designed to explain your Student Manager App in a polished, aesthetic format.</p>
+  </footer>
+</body>
+</html>
